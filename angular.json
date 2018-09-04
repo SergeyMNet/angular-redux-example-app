@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "NewsfeedApp"
+  "defaultProject": "NewsfeedApp",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
