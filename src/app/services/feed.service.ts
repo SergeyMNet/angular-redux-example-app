@@ -3,18 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ContentModel } from '../models';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
-  private API_BASE_URL = 'https//test.com';
 
-  constructor(private http: HttpClient) { }
+  private baseUrl: String;
+
+  constructor(private http: HttpClient) {
+    this.baseUrl = environment.baseUrl;
+  }
 
   getFeed(): Observable<ContentModel[]> {
+
+    const url = this.baseUrl + '/feed';
+
     return this.http
-      .get<Array<ContentModel>>(`${this.API_BASE_URL}/home-feed/all`)
-      .pipe(map(result => result));
+      .get<Array<ContentModel>>(url);
   }
 }

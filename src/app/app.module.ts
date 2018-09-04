@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RootStoreModule } from './root-store';
+import { FeedMockDataService } from './services';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 
 
@@ -15,6 +17,7 @@ import { RootStoreModule } from './root-store';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpClientInMemoryWebApiModule.forFeature(FeedMockDataService), /* Use mock data service */
     RootStoreModule
   ],
   providers: [],
