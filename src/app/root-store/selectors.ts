@@ -4,14 +4,12 @@ import {
 } from './feed-store';
 
 export const selectError: MemoizedSelector<object, string> = createSelector(
-    FeedStoreSelectors.selectFeedError,
-  (jokeError: string) => {
-    return jokeError;
-  }
+    FeedStoreSelectors.selectFeedError, (feedError: string) => {
+      return feedError; }
 );
 
 export const selectIsLoading: MemoizedSelector<object, boolean> =
- createSelector(FeedStoreSelectors.selectFeedIsLoading, (joke: boolean) => {
-    return joke;
+ createSelector(FeedStoreSelectors.selectFeedIsLoading, (feed: boolean) => {
+    return feed;
   }
 );

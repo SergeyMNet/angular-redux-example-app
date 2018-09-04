@@ -23,8 +23,10 @@ export class FeedStoreEffects {
         .getFeed()
         .pipe(
           map(
-            items =>
-              new featureActions.LoadSuccessAction({ items })
+            items =>  {
+               console.log(items);
+               return new featureActions.LoadSuccessAction({ items });
+              }
             ),
             catchError(error =>
               observableOf(new featureActions.LoadFailureAction({ error }))

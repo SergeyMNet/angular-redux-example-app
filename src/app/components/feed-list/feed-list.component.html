@@ -1,7 +1,17 @@
 <!--component html goes here -->
-<div>
+<div *ngIf="isLoading$ | async">
+    <p>is loading...</p>
+</div>
+<div *ngIf="!isLoading$ | async">
     <h4>List</h4>
-    <div *ngFor="let item of collectionMock">
+    <div *ngFor="let item of contentList$ | async">
         <app-feed-card-item></app-feed-card-item>
     </div>
+</div>
+<div *ngIf="(error$ | async)">
+    An error occurred: {{(error$ | async) | json}}
+</div>
+
+<div>
+    <button (click)="onRefresh()">refresh</button>
 </div>

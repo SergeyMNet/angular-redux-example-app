@@ -2,6 +2,11 @@ import { Actions, ActionTypes } from './actions';
 import { feedAdapter, initialState, State } from './state';
 
 export function feedReducer(state = initialState, action: Actions): State {
+
+  console.log(state);
+  // console.log(action.type);
+  // console.log(action);
+
   switch (action.type) {
     case ActionTypes.LOAD_REQUEST: {
       return {

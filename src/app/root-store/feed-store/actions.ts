@@ -18,7 +18,9 @@ export class LoadFailureAction implements Action {
 
 export class LoadSuccessAction implements Action {
   readonly type = ActionTypes.LOAD_SUCCESS;
-  constructor(public payload: { items: ContentModel[] }) {}
+  constructor(public payload: { items: Array<ContentModel> }) {
+    console.log(payload);
+  }
 }
 
 export type Actions = LoadRequestAction | LoadFailureAction | LoadSuccessAction;
