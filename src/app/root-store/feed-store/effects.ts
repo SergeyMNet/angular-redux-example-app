@@ -24,7 +24,6 @@ export class FeedStoreEffects {
         .pipe(
           map(
             items =>  {
-               console.log(items);
                return new featureActions.LoadSuccessAction({ items });
               }
             ),

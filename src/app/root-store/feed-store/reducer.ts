@@ -7,9 +7,6 @@ import { FilterModel } from '../../models/filter.model';
 
 export function feedReducer(state = initialState, action: Actions): State {
 
-  console.log(state);
-  console.log(action);
-
   switch (action.type) {
     case ActionTypes.LOAD_REQUEST: {
       return {
