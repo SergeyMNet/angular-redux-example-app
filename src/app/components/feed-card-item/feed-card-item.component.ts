@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ContentModel } from '../../models';
 
 @Component({
@@ -10,4 +10,9 @@ export class FeedCardItemComponent {
 
     @Input() content: ContentModel;
 
+    @Output() updateContent: EventEmitter<ContentModel> = new EventEmitter();
+
+    setFavorites() {
+        this.updateContent.emit(this.content);
+    }
 }

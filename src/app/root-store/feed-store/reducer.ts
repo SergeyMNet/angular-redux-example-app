@@ -1,4 +1,4 @@
-import { Actions, ActionTypes, UseFilterAction } from './actions';
+import { Actions, ActionTypes, UseFilterAction, SetFavoriteAction } from './actions';
 import { feedAdapter, initialState, State } from './state';
 import { selectAllFeedItems } from './selector';
 import { AuthorModel } from '../../models/author.model';
@@ -52,32 +52,25 @@ export function feedReducer(state = initialState, action: Actions): State {
         error: null
       };
     }
-    // case ActionTypes.SHOW_FAVORITES: {
-    //   return {
-    //     ...state,
-    //     feedList: Object.values(state.entities).filter(i => i.isFavorite),
-    //     authors: state.authors,
-    //     isLoading: false,
-    //     error: null
-    //   };
-    // }
-    // case ActionTypes.SHOW_BY_AUTHOR: {
-    //   return {
-    //     ...state,
-    //     feedList: Object.values(state.entities).filter(i => i.author === action.payload.author),
-    //     authors: state.authors,
-    //     filter: new FilterModel(),
-    //     isLoading: false,
-    //     error: null
-    //   };
-    // }
     case ActionTypes.USE_FILTER: {
-      const list = useFilter(state, action);
+      const list = useFilter(Object.values(state.entities), action.payload.filter);
       return {
         ...state,
         feedList: list,
         authors: state.authors,
         filter: action.payload.filter,
+        isLoading: false,
+        error: null
+      };
+    }
+    case ActionTypes.SET_FAVORITE: {
+      let list = setFavorite(Object.values(state.entities), action.payload.content);
+      list = useFilter(list, state.filter);
+      return {
+        ...state,
+        feedList: list,
+        authors: state.authors,
+        filter: state.filter,
         isLoading: false,
         error: null
       };
@@ -96,19 +89,23 @@ function getAuthors(items: Array<any>): Array<AuthorModel> {
   });
 }
 
-function useFilter(state: State, action: UseFilterAction): Array<ContentModel> {
+function useFilter(state_list: Array<ContentModel>, filter: FilterModel): Array<ContentModel> {
 
   let list = [];
 
-  if (action.payload.filter.selAuthor.length > 0) {
-    list = Object.values(state.entities).filter(i => i.author === action.payload.filter.selAuthor);
+  if (filter.selAuthor.length > 0 && filter.isFavorites) {
+    list = state_list.filter(i => i.author === filter.selAuthor && i.isFavorite === filter.isFavorites);
+  } else if (filter.selAuthor.length > 0) {
+    list = state_list.filter(i => i.author === filter.selAuthor);
+  } else if (filter.isFavorites) {
+    list = state_list.filter(i => i.isFavorite === filter.isFavorites);
   } else {
-    list = Object.values(state.entities);
-  }
-
-  if (action.payload.filter.isFavorites) {
-    list = list.filter(i => i.isFavorite);
+    list = state_list;
   }
 
   return list;
+}
+
+function setFavorite(list: Array<ContentModel>, content: ContentModel): Array<ContentModel> {
+  return list.map(item => item.id === content.id ? Object.assign({}, item, content) : item);
 }

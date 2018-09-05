@@ -10,7 +10,8 @@ export enum ActionTypes {
   SHOW_ALL       = '[Feed] Show All',
   SHOW_FAVORITES = '[Feed] Show Favorites',
   SHOW_BY_AUTHOR = '[Feed] Show by Author',
-  USE_FILTER     = '[Feed] Use filter for feed'
+  USE_FILTER     = '[Feed] Use filter for feed',
+  SET_FAVORITE   = '[Feed] Set favorite'
 }
 
 export class LoadRequestAction implements Action {
@@ -27,24 +28,20 @@ export class LoadSuccessAction implements Action {
   constructor(public payload: { items: Array<ContentModel> }) {}
 }
 
-
 export class ShowAllAction implements Action {
   readonly type = ActionTypes.SHOW_ALL;
   constructor() {}
 }
-// export class ShowFavoritesAction implements Action {
-//   readonly type = ActionTypes.SHOW_FAVORITES;
-//   constructor() {}
-// }
-// export class ShowByAuthorAction implements Action {
-//   readonly type = ActionTypes.SHOW_BY_AUTHOR;
-//   constructor(public payload: { author: string }) {}
-// }
 
 export class UseFilterAction implements Action {
   readonly type = ActionTypes.USE_FILTER;
   constructor(public payload: { filter: FilterModel }) {}
 }
 
+export class SetFavoriteAction implements Action {
+  readonly type = ActionTypes.SET_FAVORITE;
+  constructor(public payload: { content: ContentModel }) {}
+}
+
 export type Actions = LoadRequestAction | LoadFailureAction | LoadSuccessAction |
-                      ShowAllAction | UseFilterAction;
+                      ShowAllAction | UseFilterAction | SetFavoriteAction;

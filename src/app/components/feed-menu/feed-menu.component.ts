@@ -17,7 +17,6 @@ export class FeedMenuComponent {
     constructor() { }
 
     public showOnlyFavorites() {
-
         this.useFilter.emit(this.filter);
     }
 }

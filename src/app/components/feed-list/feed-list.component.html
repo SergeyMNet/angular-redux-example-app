@@ -18,7 +18,9 @@
     <p-dataScroller [value]="contentList$ | async" [rows]="10">
         <p-header>Content</p-header>
         <ng-template let-feedItem pTemplate="item">
-            <app-feed-card-item [content]="feedItem"></app-feed-card-item>
+            <app-feed-card-item 
+                [content]="feedItem" 
+                (updateContent)="updateContent($event)"></app-feed-card-item>
         </ng-template>
     </p-dataScroller>
 

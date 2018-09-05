@@ -50,11 +50,15 @@ export class FeedListComponent implements OnInit {
         );
     }
 
-    filterFeed(f: any) {
-        console.log(f);
-
+    filterFeed(f: FilterModel) {
         this.store$.dispatch(
             new FeedStoreActions.UseFilterAction({ filter: f })
+        );
+    }
+
+    updateContent(item: ContentModel) {
+        this.store$.dispatch(
+            new FeedStoreActions.SetFavoriteAction({ content: item })
         );
     }
 }
