@@ -1,35 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AuthorModel } from '../../models/author.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { RootStoreState, FeedStoreSelectors, FeedStoreActions } from '../../root-store';
+import { InvokeFunctionExpr } from '@angular/compiler';
+import { FilterModel } from '../../models/filter.model';
 
 @Component({
     selector: 'app-authors-list',
     templateUrl: 'authors-list.component.html',
     styleUrls: ['authors-list.component.scss']
 })
-export class AuthorsListComponent implements OnInit {
+export class AuthorsListComponent {
 
-    authorsList$: Observable<AuthorModel[]>;
-    isLoading$: Observable<boolean>;
+    @Input() filter: FilterModel = new FilterModel();
+    @Input() authorsList: Array<AuthorModel>;
 
-    constructor(private store$: Store<RootStoreState.State>) { }
+    @Output() useFilter: EventEmitter<FilterModel> = new EventEmitter();
 
-    ngOnInit(): void {
-
-        this.authorsList$ = this.store$.select(
-            FeedStoreSelectors.selectAuthors
-        );
-
-        this.isLoading$ = this.store$.select(
-            FeedStoreSelectors.selectFeedIsLoading
-        );
-    }
+    constructor() { }
 
     selAuthor(name: string) {
-        this.store$.dispatch(
-            new FeedStoreActions.ShowByAuthorAction({ author: name })
-        );
+
+        if (name === this.filter.selAuthor) {
+            this.filter.selAuthor = '';
+            this.useFilter.emit(this.filter);
+        } else {
+            this.filter.selAuthor = name;
+            this.useFilter.emit(this.filter);
+        }
     }
 }

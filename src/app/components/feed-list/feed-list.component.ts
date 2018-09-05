@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { RootStoreState, FeedStoreSelectors, FeedStoreActions } from '../../root-store';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+import { FilterModel } from '../../models/filter.model';
+import { AuthorModel } from '../../models/author.model';
 
 
 @Component({
@@ -13,14 +15,11 @@ import { map } from 'rxjs/operators';
 })
 export class FeedListComponent implements OnInit {
 
-
-    selFavorites = 0;
-    selAuthor = '';
-
     contentList$: Observable<ContentModel[]>;
+    authorsList$: Observable<AuthorModel[]>;
     error$: Observable<any>;
     isLoading$: Observable<boolean>;
-
+    filterFeed$: Observable<FilterModel>;
 
     constructor(private store$: Store<RootStoreState.State>) { }
 
@@ -28,6 +27,10 @@ export class FeedListComponent implements OnInit {
 
         this.contentList$ = this.store$.select(
             FeedStoreSelectors.selectFeedList
+        );
+
+        this.authorsList$ = this.store$.select(
+            FeedStoreSelectors.selectAuthors
         );
 
         this.error$ = this.store$.select(
@@ -38,8 +41,20 @@ export class FeedListComponent implements OnInit {
             FeedStoreSelectors.selectFeedIsLoading
         );
 
+        this.filterFeed$ = this.store$.select(
+            FeedStoreSelectors.selectFilter
+        );
+
         this.store$.dispatch(
             new FeedStoreActions.LoadRequestAction()
+        );
+    }
+
+    filterFeed(f: any) {
+        console.log(f);
+
+        this.store$.dispatch(
+            new FeedStoreActions.UseFilterAction({ filter: f })
         );
     }
 }

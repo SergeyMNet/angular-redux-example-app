@@ -1,9 +1,22 @@
-<!--component html goes here -->
-<div>    
-<h4>Must be item</h4>
-<p>author: {{content.author}}</p>
-<p>actionType: {{content.actionType}}</p>
-<p>subjectName: {{content.subjectName}}</p>
-<p>objectName: {{content.objectName}}</p>
+<div class="ui-g car-item">
+    <div class="ui-g-12 ui-md-12">
+        <h4>{{content.objectName}} {{content.actionType}} {{content.subjectName}} <i class="fas fa-star"></i></h4>
+    </div>
+    <div class="ui-g-12 ui-md-3 center">
+        <img width="120" height="120" src="../../../assets/images/a.png">
+    </div>
+    <div class="ui-g-12 ui-md-9">
+        <div class="ui-g">
+            <div class="ui-g-2 ui-sm-6">Author: </div>
+            <div class="ui-g-10 ui-sm-6">{{content.author}}</div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-2 ui-sm-6">Text: </div>
+            <div class="ui-g-10 ui-sm-6">{{content.text}}</div>
+        </div>
+    </div>
+    <div>
+        
+    </div>
 </div>
 <hr>

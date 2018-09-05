@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ContentModel } from '../../models';
+import { FilterModel } from '../../models/filter.model';
 
 export enum ActionTypes {
   LOAD_REQUEST = '[Feed] Load Request',
@@ -8,7 +9,8 @@ export enum ActionTypes {
 
   SHOW_ALL       = '[Feed] Show All',
   SHOW_FAVORITES = '[Feed] Show Favorites',
-  SHOW_BY_AUTHOR = '[Feed] Show by Author'
+  SHOW_BY_AUTHOR = '[Feed] Show by Author',
+  USE_FILTER     = '[Feed] Use filter for feed'
 }
 
 export class LoadRequestAction implements Action {
@@ -30,14 +32,19 @@ export class ShowAllAction implements Action {
   readonly type = ActionTypes.SHOW_ALL;
   constructor() {}
 }
-export class ShowFavoritesAction implements Action {
-  readonly type = ActionTypes.SHOW_FAVORITES;
-  constructor() {}
-}
-export class ShowByAuthorAction implements Action {
-  readonly type = ActionTypes.SHOW_BY_AUTHOR;
-  constructor(public payload: { author: string }) {}
+// export class ShowFavoritesAction implements Action {
+//   readonly type = ActionTypes.SHOW_FAVORITES;
+//   constructor() {}
+// }
+// export class ShowByAuthorAction implements Action {
+//   readonly type = ActionTypes.SHOW_BY_AUTHOR;
+//   constructor(public payload: { author: string }) {}
+// }
+
+export class UseFilterAction implements Action {
+  readonly type = ActionTypes.USE_FILTER;
+  constructor(public payload: { filter: FilterModel }) {}
 }
 
 export type Actions = LoadRequestAction | LoadFailureAction | LoadSuccessAction |
-                      ShowAllAction | ShowFavoritesAction | ShowByAuthorAction;
+                      ShowAllAction | UseFilterAction;

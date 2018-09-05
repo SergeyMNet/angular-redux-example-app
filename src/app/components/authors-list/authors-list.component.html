@@ -1,9 +1,13 @@
-<!--component html goes here -->
-<!-- List -->
-<div *ngIf="!(isLoading$ | async)">
-    <h4>List</h4>    
-    <div *ngFor="let a of authorsList$ | async">
-        <button (click)="selAuthor(a.name)" >{{a.name}}</button>
-        
-    </div>
-</div>
+
+<p-carousel headerText="Authors" [value]="authorsList">
+    <ng-template let-author pTemplate="item">
+        <div class="ui-grid ui-grid-responsive" (click)="selAuthor(author.name)" [ngClass]="author.name === filter.selAuthor ? 'selected' : ''" >
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12 center"><img src="../../../assets/images/prime.jpg" width="60"></div>
+            </div>
+            <div class="ui-grid-row">                
+                <div class="ui-grid-col-12 center">{{author.name}}</div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

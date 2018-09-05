@@ -1,16 +1,30 @@
 <!--component html goes here -->
-<app-feed-menu></app-feed-menu>
-
-<app-authors-list></app-authors-list>
-
-<!-- List -->
 <div *ngIf="!(isLoading$ | async)">
-    <h4>List</h4>    
-    <div *ngFor="let content of contentList$ | async">
-        <app-feed-card-item [content]="content"></app-feed-card-item>
-    </div>
+
+    <!-- Filter menu -->
+    <app-feed-menu 
+        [filter]="(filterFeed$ | async)" 
+        (useFilter)="filterFeed($event)" ></app-feed-menu>
+    <br>
+
+    <!-- Authors -->
+    <app-authors-list 
+        [filter]="(filterFeed$ | async)" 
+        [authorsList]="(authorsList$ | async)"
+        (useFilter)="filterFeed($event)"></app-authors-list>
+    <br>
+
+    <!-- Feed List -->
+    <p-dataScroller [value]="contentList$ | async" [rows]="10">
+        <p-header>Content</p-header>
+        <ng-template let-feedItem pTemplate="item">
+            <app-feed-card-item [content]="feedItem"></app-feed-card-item>
+        </ng-template>
+    </p-dataScroller>
+
 </div>
 
+<!-- errors -->
 <div *ngIf="(error$ | async)">
     An error occurred: {{(error$ | async) | json}}
 </div>

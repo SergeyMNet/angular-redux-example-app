@@ -6,6 +6,16 @@ import { AppComponent } from './app.component';
 import { RootStoreModule } from './root-store';
 import { FeedMockDataService } from './services';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// ng prime ui
+import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
+import {DataScrollerModule} from 'primeng/datascroller';
+import {CarouselModule} from 'primeng/carousel';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
+// components
 import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { FeedCardItemComponent } from './components/feed-card-item/feed-card-item.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
@@ -15,6 +25,8 @@ import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { HomeComponent } from './shared/home/home.component';
 import { AuthorsListComponent } from './components/authors-list/authors-list.component';
+
+
 
 
 
@@ -32,11 +44,17 @@ import { AuthorsListComponent } from './components/authors-list/authors-list.com
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forFeature(FeedMockDataService), // Use mock data service
     AppRoutingModule,
-    RootStoreModule
+    RootStoreModule,
+    ButtonModule,
+    DataScrollerModule,
+    CarouselModule,
+    CheckboxModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

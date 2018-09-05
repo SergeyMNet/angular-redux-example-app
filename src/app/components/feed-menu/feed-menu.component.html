@@ -1,7 +1,4 @@
-<!--component html goes here -->
-<!-- Menu -->
-<div>
-    <h4>Menu</h4>
-    <button (click)="showAll()">All</button>
-    <button (click)="showOnlyFavorites()">FavoriteOnly</button>
+
+<div class="ui-g" class="menu">
+    <p-checkbox label="Favorite Only" [(ngModel)]="filter.favoriteOnly" (onChange)="showOnlyFavorites()" binary="true"></p-checkbox>
 </div>

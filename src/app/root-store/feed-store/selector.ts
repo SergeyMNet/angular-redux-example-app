@@ -7,14 +7,15 @@ import {
   import { ContentModel } from '../../models';
   import { feedAdapter, State } from './state';
 import { AuthorModel } from '../../models/author.model';
+import { FilterModel } from '../../models/filter.model';
 
   export const getError = (state: State): any => state.error;
   export const getIsLoading = (state: State): boolean => state.isLoading;
   export const getFeedList = (state: State): Array<ContentModel> => state.feedList;
   export const getAuthors = (state: State): Array<AuthorModel> => state.authors;
+  export const getFilter = (state: State): FilterModel => state.filter;
 
-  export const selectFeedState: MemoizedSelector<object, State> =
-      createFeatureSelector<State>('feed');
+  export const selectFeedState: MemoizedSelector<object, State> = createFeatureSelector<State>('feed');
 
   // Get All
   export const selectAllFeedItems: (state: object) =>
@@ -41,3 +42,6 @@ import { AuthorModel } from '../../models/author.model';
 
   // Get authors
   export const selectAuthors: MemoizedSelector<object, Array<AuthorModel>> = createSelector(selectFeedState, getAuthors);
+
+  // Get Filter
+  export const selectFilter: MemoizedSelector<object, FilterModel> = createSelector(selectFeedState, getFilter);

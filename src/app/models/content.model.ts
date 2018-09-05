@@ -13,5 +13,7 @@ export class ContentModel {
     subjectName: string;
     objectName: string;
 
+    text: string;
+
     comments: Array<CommentModel>;
 }

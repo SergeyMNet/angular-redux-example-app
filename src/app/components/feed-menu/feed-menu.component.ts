@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RootStoreState, FeedStoreActions } from '../../root-store';
 import { Store } from '@ngrx/store';
+import { FilterModel } from '../../models/filter.model';
 
 @Component({
     selector: 'app-feed-menu',
@@ -9,29 +10,14 @@ import { Store } from '@ngrx/store';
 })
 export class FeedMenuComponent {
 
-    constructor(private store$: Store<RootStoreState.State>) { }
+    @Input() filter: FilterModel = new FilterModel();
 
-    public showAll() {
-        this.store$.dispatch(
-            new FeedStoreActions.ShowAllAction()
-        );
-    }
+    @Output() useFilter: EventEmitter<FilterModel> = new EventEmitter();
+
+    constructor() { }
+
     public showOnlyFavorites() {
-        this.store$.dispatch(
-            new FeedStoreActions.ShowFavoritesAction()
-        );
-    }
-    public showByAuthor(author: string) {
-        this.store$.dispatch(
-            new FeedStoreActions.ShowByAuthorAction({ author })
-        );
-    }
 
-
-    public onRefresh() {
-        this.store$.dispatch(
-            new FeedStoreActions.LoadRequestAction()
-        );
+        this.useFilter.emit(this.filter);
     }
-
 }
