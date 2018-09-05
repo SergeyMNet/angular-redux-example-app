@@ -11,6 +11,9 @@ import { FeedCardItemComponent } from './components/feed-card-item/feed-card-ite
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
+import { LoadingComponent } from './shared/loading/loading.component';
+import { HomeComponent } from './shared/home/home.component';
 
 
 
@@ -20,7 +23,10 @@ import { AppRoutingModule } from './app-routing.module';
     FeedListComponent,
     FeedCardItemComponent,
     NotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    FeedMenuComponent,
+    LoadingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

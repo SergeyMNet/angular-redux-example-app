@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ContentModel } from '../../models';
 
 @Component({
     selector: 'app-feed-card-item',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
     styleUrls: ['feed-card-item.component.scss']
 })
 export class FeedCardItemComponent {
+
+    @Input() content: ContentModel;
 
 }

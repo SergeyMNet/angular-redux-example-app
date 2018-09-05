@@ -1,17 +1,14 @@
 <!--component html goes here -->
-<div *ngIf="isLoading$ | async">
-    <p>is loading...</p>
-</div>
-<div *ngIf="!isLoading$ | async">
-    <h4>List</h4>
-    <div *ngFor="let item of contentList$ | async">
-        <app-feed-card-item></app-feed-card-item>
+<app-feed-menu></app-feed-menu>
+
+<!-- List -->
+<div *ngIf="!(isLoading$ | async)">
+    <h4>List</h4>    
+    <div *ngFor="let content of contentList$ | async">
+        <app-feed-card-item [content]="content"></app-feed-card-item>
     </div>
 </div>
+
 <div *ngIf="(error$ | async)">
     An error occurred: {{(error$ | async) | json}}
-</div>
-
-<div>
-    <button (click)="onRefresh()">refresh</button>
 </div>

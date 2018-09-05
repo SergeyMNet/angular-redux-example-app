@@ -4,12 +4,17 @@ import { Observable } from 'rxjs';
 import { RootStoreState, FeedStoreSelectors, FeedStoreActions } from '../../root-store';
 import { Store } from '@ngrx/store';
 
+
 @Component({
     selector: 'app-feed-list',
     templateUrl: 'feed-list.component.html',
     styleUrls: ['feed-list.component.scss']
 })
 export class FeedListComponent implements OnInit  {
+
+
+    selFavorites = 0;
+    selAuthor = '';
 
     contentList$: Observable<ContentModel[]>;
     error$: Observable<any>;
@@ -35,11 +40,4 @@ export class FeedListComponent implements OnInit  {
             new FeedStoreActions.LoadRequestAction()
         );
     }
-
-    onRefresh() {
-        this.store$.dispatch(
-            new FeedStoreActions.LoadRequestAction()
-        );
-    }
 }
-
