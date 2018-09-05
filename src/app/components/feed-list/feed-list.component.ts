@@ -3,6 +3,7 @@ import { ContentModel } from '../../models';
 import { Observable } from 'rxjs';
 import { RootStoreState, FeedStoreSelectors, FeedStoreActions } from '../../root-store';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Store } from '@ngrx/store';
     templateUrl: 'feed-list.component.html',
     styleUrls: ['feed-list.component.scss']
 })
-export class FeedListComponent implements OnInit  {
+export class FeedListComponent implements OnInit {
 
 
     selFavorites = 0;
@@ -24,8 +25,9 @@ export class FeedListComponent implements OnInit  {
     constructor(private store$: Store<RootStoreState.State>) { }
 
     ngOnInit(): void {
+
         this.contentList$ = this.store$.select(
-            FeedStoreSelectors.selectAllFeedItems
+            FeedStoreSelectors.selectFeedList
         );
 
         this.error$ = this.store$.select(

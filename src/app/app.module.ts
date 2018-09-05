@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { HomeComponent } from './shared/home/home.component';
+import { AuthorsListComponent } from './components/authors-list/authors-list.component';
 
 
 
@@ -26,7 +27,8 @@ import { HomeComponent } from './shared/home/home.component';
     HeaderComponent,
     FeedMenuComponent,
     LoadingComponent,
-    HomeComponent
+    HomeComponent,
+    AuthorsListComponent
   ],
   imports: [
     BrowserModule,

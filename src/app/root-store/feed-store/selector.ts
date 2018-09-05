@@ -6,18 +6,23 @@ import {
 
   import { ContentModel } from '../../models';
   import { feedAdapter, State } from './state';
+import { AuthorModel } from '../../models/author.model';
 
   export const getError = (state: State): any => state.error;
   export const getIsLoading = (state: State): boolean => state.isLoading;
+  export const getFeedList = (state: State): Array<ContentModel> => state.feedList;
+  export const getAuthors = (state: State): Array<AuthorModel> => state.authors;
 
   export const selectFeedState: MemoizedSelector<object, State> =
       createFeatureSelector<State>('feed');
 
+  // Get All
   export const selectAllFeedItems: (state: object) =>
       ContentModel[] = feedAdapter.getSelectors(selectFeedState).selectAll;
 
+  // Get by ID
   export const selectFeedById = (id: string) =>
-    createSelector(this.selectAllJokeItems, (allFeed: ContentModel[]) => {
+    createSelector(this.selectAllFeedItems, (allFeed: ContentModel[]) => {
       if (allFeed) {
         return allFeed.find(p => p.id === id);
       } else {
@@ -25,12 +30,14 @@ import {
       }
     });
 
-  export const selectFeedError: MemoizedSelector<object, any> = createSelector(
-    selectFeedState,
-    getError
-  );
+  // get Errors
+  export const selectFeedError: MemoizedSelector<object, any> = createSelector(selectFeedState, getError);
 
-  export const selectFeedIsLoading: MemoizedSelector<
-    object,
-    boolean
-  > = createSelector(selectFeedState, getIsLoading);
+  // isLoading
+  export const selectFeedIsLoading: MemoizedSelector<object, boolean> = createSelector(selectFeedState, getIsLoading);
+
+  // Get already filtered FeedList
+  export const selectFeedList: MemoizedSelector<object, Array<ContentModel>> = createSelector(selectFeedState, getFeedList);
+
+  // Get authors
+  export const selectAuthors: MemoizedSelector<object, Array<AuthorModel>> = createSelector(selectFeedState, getAuthors);

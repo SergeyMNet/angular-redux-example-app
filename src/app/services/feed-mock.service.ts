@@ -15,7 +15,7 @@ export class FeedMockDataService implements InMemoryDbService {
       },
       {
         'id': '2',
-        'isFavorite': false,
+        'isFavorite': true,
         'author': 'Sergey',
         'actionType': 'liked',
         'subjectName': '777',
@@ -29,6 +29,24 @@ export class FeedMockDataService implements InMemoryDbService {
         'actionType': 'liked',
         'subjectName': 'another',
         'objectName': 'Sergey',
+        'comments': []
+      },
+      {
+        'id': '4',
+        'isFavorite': false,
+        'author': 'Adam',
+        'actionType': 'liked',
+        'subjectName': 'another',
+        'objectName': 'Sergey',
+        'comments': []
+      },
+      {
+        'id': '5',
+        'isFavorite': true,
+        'author': 'Felipe',
+        'actionType': 'liked',
+        'subjectName': 'another',
+        'objectName': 'Adam',
         'comments': []
       },
     ];

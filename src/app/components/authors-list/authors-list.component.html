@@ -1,0 +1,9 @@
+<!--component html goes here -->
+<!-- List -->
+<div *ngIf="!(isLoading$ | async)">
+    <h4>List</h4>    
+    <div *ngFor="let a of authorsList$ | async">
+        <button (click)="selAuthor(a.name)" >{{a.name}}</button>
+        
+    </div>
+</div>

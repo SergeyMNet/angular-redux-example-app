@@ -23,7 +23,7 @@ export class FeedMenuComponent {
     }
     public showByAuthor(author: string) {
         this.store$.dispatch(
-            new FeedStoreActions.ShowByAuthorAction(author)
+            new FeedStoreActions.ShowByAuthorAction({ author })
         );
     }
 
