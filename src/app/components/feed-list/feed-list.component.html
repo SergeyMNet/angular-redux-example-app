@@ -1,5 +1,5 @@
 <!--component html goes here -->
-<div *ngIf="!(isLoading$ | async)">
+<div *ngIf="!(isLoading$ | async) && !(error$ | async)">
 
     <!-- Filter menu -->
     <app-feed-menu 
@@ -27,6 +27,6 @@
 </div>
 
 <!-- errors -->
-<div *ngIf="(error$ | async)">
-    An error occurred: {{(error$ | async) | json}}
+<div *ngIf="(error$ | async)" class="center">
+    <p-message severity="error" style="font-size: 18px; font-weight: 600;" text="{{(error$ | async).message}}"></p-message>    
 </div>

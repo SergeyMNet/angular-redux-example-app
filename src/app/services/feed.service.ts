@@ -5,9 +5,7 @@ import { map } from 'rxjs/operators';
 import { ContentModel } from '../models';
 import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FeedService {
 
   private baseUrl: String;

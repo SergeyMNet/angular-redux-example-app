@@ -1,10 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RootStoreModule } from './root-store';
-import { FeedMockDataService } from './services';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,6 +13,11 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {DataScrollerModule} from 'primeng/datascroller';
 import {CarouselModule} from 'primeng/carousel';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+// services
+import { FeedMockDataService, FeedService, AuthService, TokenInterceptor } from './services';
 
 // components
 import { FeedListComponent } from './components/feed-list/feed-list.component';
@@ -25,8 +29,6 @@ import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { HomeComponent } from './shared/home/home.component';
 import { AuthorsListComponent } from './components/authors-list/authors-list.component';
-
-
 
 
 
@@ -54,9 +56,19 @@ import { AuthorsListComponent } from './components/authors-list/authors-list.com
     DataScrollerModule,
     CarouselModule,
     CheckboxModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MessagesModule,
+    MessageModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    FeedService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
